@@ -10,6 +10,7 @@ int main (int argc, char **argv)
 }
 
 void cli(int * menu){
+	printf("%i\n", *menu);
 	if(menu==0){
 		printf("Sistema de administración\n");
 		printf("============\n");
@@ -23,7 +24,8 @@ void cli(int * menu){
 		printf("==========\n");
 		printf("Ingrese una opción: ");
 		scanf("%d", &menuOpt);
-		
+		printf("%d", menuOpt);
+	}	
+	else{
 	}
-		
 }
