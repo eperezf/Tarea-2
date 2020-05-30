@@ -5,27 +5,38 @@
 int main (int argc, char **argv)
 {
 	cli(0);
-
-	return 0;
 }
 
-void cli(int * menu){
-	printf("%i\n", *menu);
-	if(menu==0){
-		printf("Sistema de administración\n");
-		printf("============\n");
-		printf("1.- Cargar archivo de clientes\n");
-		printf("2.- Agregar cliente\n");
-		printf("3.- Eliminar cliente\n");
-		printf("4.- Agregar transacción\n");
-		printf("5.- Deshacer transacción\n");
-		printf("6.- Buscar cliente\n");
-		printf("7.- Generar lista de clientes\n");
-		printf("==========\n");
-		printf("Ingrese una opción: ");
-		scanf("%d", &menuOpt);
-		printf("%d", menuOpt);
-	}	
-	else{
+void cli(int menu){
+	if (menu == 0){
+		printf("\e[1;1H\e[2J");
+		printf("Main menu\n");
+		printf("Enter option: ");
+		scanf("%d", &selected);
+		cli(selected);
 	}
+	if (menu == 1){
+		printf("\e[1;1H\e[2J");
+		printf("Load file\n");
+		scanf("%s", &filename);
+		leer_archivo(&filename);
+	}
+	
+}
+
+void leer_archivo(const char * filename){
+	char line[255];
+	int linelength;
+	FILE *fp;
+	if ((fp = fopen(filename, "r"))){
+		fp = fopen(filename, "r");
+    }
+		else{
+			printf("ERROR: El archivo no existe\n");
+			printf("Press Any Key to Continue\n"); 
+			getch();
+			cli(0);
+		}
+	
+	
 }
