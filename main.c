@@ -1,9 +1,11 @@
 //main.c 
 
 #include "main.h"
+#include "lista.h"
 
 int main (int argc, char **argv)
 {
+	
 	cli(0);
 }
 
@@ -30,7 +32,7 @@ void cli(int menu){
 		printf("===================\n");
 		printf("Escriba la ruta del archivo: ");
 		scanf("%s", &filename);
-		leer_archivo(&filename);
+		crear_lista(&filename, &lista_personas);
 	}
 	if (menu == 2){
 		printf("\e[1;1H\e[2J");
@@ -40,46 +42,4 @@ void cli(int menu){
 	
 }
 
-void leer_archivo(const char * filename){
-	char line[255];
-	int linelength;
-	FILE *fp;
-	if ((fp = fopen(filename, "r"))){
-		fp = fopen(filename, "r");
-		printf("Archivo abierto correctamente. Guardando en memoria...\n");
-		loaded = 1;
-		fgets(line, 255, fp);
-		printf("%s", line);
-		int id;
-		char* nombre;
-    char* apellido;
-    char* email;
-    char* genero;
-    char* direccion;
-    char aux[1000];
-		fgets(aux,999,fp);
-		id = atoi(strtok(aux,"\t"));
-    nombre = strtok(NULL,"\t");
-    apellido = strtok(NULL,"\t");
-    email = strtok(NULL,"\t");
-		genero = strtok(NULL,"\t");
-		direccion = strtok(NULL, "\n");
-	
 
-		printf("ID: %i\n", id);
-		printf("NOMBRE: %s\n", nombre);
-		printf("APELLIDO: %s\n", apellido);
-		printf("EMAIL: %s\n", email);
-		printf("GENERO: %s\n", genero);
-		printf("DIRECCIÓN: %s\n", direccion);
-		sleep(5);
-		cli(0);
-  }
-	else{
-		printf("\nERROR: El archivo no existe\n");
-		loaded = 0;
-		sleep(1);
-		cli(0);
-	}
-
-}

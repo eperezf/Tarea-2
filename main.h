@@ -4,8 +4,7 @@
 #include <unistd.h>
 
 void cli(int menu);
+struct p *lista_personas = NULL;
 
-void leer_archivo(const char * filename);
+
 int selected;
-char filename;
-int loaded;
