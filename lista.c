@@ -46,13 +46,11 @@ void crear_lista(const char * filename, struct p **lista){
         }
 		}
 		sleep(5);
-		cli(0);
   }
 	else{
 		printf("\nERROR: El archivo no existe\n");
 		loaded = 0;
 		sleep(1);
-		cli(0);
 	}
 
 }

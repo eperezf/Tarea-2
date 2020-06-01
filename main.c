@@ -33,6 +33,7 @@ void cli(int menu){
 		printf("Escriba la ruta del archivo: ");
 		scanf("%s", &filename);
 		crear_lista(&filename, &lista_personas);
+		cli(0);
 	}
 	if (menu == 2){
 		printf("\e[1;1H\e[2J");
