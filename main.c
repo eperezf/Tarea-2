@@ -105,7 +105,7 @@ int main (int argc, char **argv){
 			printf("Seleccione método de búsqueda: ");
 			scanf("%d", &submenu);
 			if (submenu == 1){
-				int searchId;
+				int searchId = malloc(sizeof(char*));
 				printf("===================\n");
 				printf("ID: ");
 				scanf("%d", &searchId);
@@ -113,19 +113,19 @@ int main (int argc, char **argv){
 				menu = 0;
 			}
 			else if (submenu == 2){
-				char* searchNombre;
+				char* searchNombre = malloc(sizeof(char*));
 				printf("===================\n");
 				printf("Nombre: ");
 				scanf("%s", searchNombre);
 				buscar_por_nombre(hash, searchNombre);
 			}
 			else if (submenu == 3){
-				char* searchApellido;
+				char* searchApellido = malloc(sizeof(char*));
 				printf("===================\n");
 				printf("Apellido: ");
 				scanf("%s", searchApellido);
 				printf("Buscando %s\n", searchApellido);
-				buscar_por_apellido(&hash[hash_data(searchApellido)].list, searchApellido);
+				buscar_por_apellido(hash, searchApellido);
 			}
 			else {
 				menu = 4;

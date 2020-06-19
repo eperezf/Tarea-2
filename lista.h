@@ -24,4 +24,4 @@ List *crear_lista();
 void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, char* email, char* genero, char* direccion/*, Pile* transacciones*/);
 void remover_elemento_lista (List** list, char* nombre, char* apellido);
 void listar_lista(List** list);
-void buscar_por_apellido(List** list, char* apellido);
+

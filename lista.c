@@ -74,19 +74,3 @@ void listar_lista(List** list){
 
 }
 
-void buscar_por_apellido(List** list, char* apellido){
-	printf("Buscando %s\n", apellido);
-	List* nodo =*list;
-	while(nodo->next != NULL){
-		if(strcmp(nodo->apellido, apellido)==0){
-			printf("USUARIO ENCONTRADO:\n");
-			printf("ID: %i\n", nodo->id);
-			printf("Nombre: %s\n", nodo->nombre);
-			printf("Apellido: %s\n", nodo->apellido);
-			printf("Email: %s\n", nodo->email);
-			printf("Género: %s\n", nodo->genero);
-			printf("Dirección: %s\n\n", nodo->direccion);
-		}
-		nodo = nodo->next;
-	}
-}

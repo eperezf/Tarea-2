@@ -16,6 +16,6 @@ void remover_elemento_hash(Hash* hash, int key);
 
 void buscar_por_id(Hash* hash, int id);
 void buscar_por_nombre(Hash* hash, char* nombre);
-
+void buscar_por_apellido(Hash* hash, char* apellido);
 
 

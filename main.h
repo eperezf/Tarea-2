@@ -11,6 +11,4 @@ int loaded;
 int firstload;
 int free_id = 1;
 
-
-
 void cargar_archivo(char *filename, Hash* hash);
