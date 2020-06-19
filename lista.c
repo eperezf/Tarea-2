@@ -32,27 +32,28 @@ void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, c
 }
 
 void remover_elemento_lista(List** list, char* nombre, char* apellido){
-	printf ("\nEliminando a %s %s\n", nombre, apellido);
 	List* nodo = *list;
 	List* anterior = NULL;
 	List* next = NULL;
 	while (nodo->next!= NULL){
 		if (!strcmp(nodo->nombre, nombre) && !strcmp(nodo->apellido, apellido)){
-			printf("Usuario encontrado. Eliminando.\n");
-			sleep(2);
+			printf("Usuario encontrado. %s %s Eliminando.\n", nombre, apellido);
+			
 
 			if (anterior == NULL){
+				*list=nodo->next;
 			}
 			else {
-				if (next == NULL){
+				if (nodo->next == NULL){
 					anterior->next = NULL;
 				}
 				else {
-					anterior->next = next;
+					anterior->next = nodo->next;
 				}
 			}
 			free(nodo);
 			nodo = *list;
+			sleep(3);
 			return;
 		}
 		else {
@@ -70,4 +71,22 @@ void listar_lista(List** list){
     nodo = nodo->next;
   }
 	printf("%d %s %s %s %s %s\n",nodo->id, nodo->nombre, nodo->apellido, nodo->email, nodo->genero, nodo->direccion);
+
+}
+
+void buscar_por_apellido(List** list, char* apellido){
+	printf("Buscando %s\n", apellido);
+	List* nodo =*list;
+	while(nodo->next != NULL){
+		if(strcmp(nodo->apellido, apellido)==0){
+			printf("USUARIO ENCONTRADO:\n");
+			printf("ID: %i\n", nodo->id);
+			printf("Nombre: %s\n", nodo->nombre);
+			printf("Apellido: %s\n", nodo->apellido);
+			printf("Email: %s\n", nodo->email);
+			printf("Género: %s\n", nodo->genero);
+			printf("Dirección: %s\n\n", nodo->direccion);
+		}
+		nodo = nodo->next;
+	}
 }

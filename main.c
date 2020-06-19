@@ -94,7 +94,7 @@ int main (int argc, char **argv){
 			menu = 0;
 		}
 
-		//Buscar Cliente TODO
+		//Buscar Cliente
 		else if (menu == 4){
 			printf("\e[1;1H\e[2J");
 			printf("Buscar cliente\n");
@@ -110,6 +110,7 @@ int main (int argc, char **argv){
 				printf("ID:");
 				scanf("%d", &searchId);
 				buscar_por_id(hash, searchId);
+				menu = 0;
 			}
 			else if (submenu == 2){
 				char* searchNombre;
@@ -123,7 +124,8 @@ int main (int argc, char **argv){
 				printf("===================\n");
 				printf("Apellido:");
 				scanf("%s", searchApellido);
-				buscar_por_apellido(&hash[hash_data(apellido)].list, searchApellido);
+				printf("Buscando %s\n", searchApellido);
+				buscar_por_apellido(&hash[hash_data(searchApellido)].list, searchApellido);
 			}
 			else {
 				menu = 4;
