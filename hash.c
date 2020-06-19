@@ -12,7 +12,7 @@ Hash* crear_hash(int size){
 }
 
 int hash_data(char* apellido){
-	int hash = apellido[0] % 5;
+	int hash = apellido[0]-65; //ASCII A = 65 DEC
 	return hash;
 }
 
