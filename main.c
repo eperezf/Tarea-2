@@ -107,7 +107,7 @@ int main (int argc, char **argv){
 			if (submenu == 1){
 				int searchId;
 				printf("===================\n");
-				printf("ID:");
+				printf("ID: ");
 				scanf("%d", &searchId);
 				buscar_por_id(hash, searchId);
 				menu = 0;
@@ -115,14 +115,14 @@ int main (int argc, char **argv){
 			else if (submenu == 2){
 				char* searchNombre;
 				printf("===================\n");
-				printf("Nombre:");
+				printf("Nombre: ");
 				scanf("%s", searchNombre);
 				buscar_por_nombre(hash, searchNombre);
 			}
 			else if (submenu == 3){
 				char* searchApellido;
 				printf("===================\n");
-				printf("Apellido:");
+				printf("Apellido: ");
 				scanf("%s", searchApellido);
 				printf("Buscando %s\n", searchApellido);
 				buscar_por_apellido(&hash[hash_data(searchApellido)].list, searchApellido);
