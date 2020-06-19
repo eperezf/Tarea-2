@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-struct p *lista = NULL;
+#include "hash.h"
+
 
 int menu;
+int submenu;
 int loaded;
 int firstload;
+int free_id = 1;
 
-char nombre;
-char apellido;
-char email;
-int genero;
-char direccion;
+
+
+void cargar_archivo(char *filename, Hash* hash);

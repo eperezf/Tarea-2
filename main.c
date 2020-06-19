@@ -1,11 +1,19 @@
 //main.c 
 
 #include "main.h"
-#include "lista.h"
 
 int main (int argc, char **argv){
 	firstload = 1;
-	char* data[5];
+	char nombre[50];
+	char apellido[50];
+	char email[50];
+	char genero[10];
+	char direccion[256];
+	
+
+	List* list;
+	Hash* hash = crear_hash();
+	
 	while(menu !=9){
 
 		//Menu principal
@@ -14,8 +22,10 @@ int main (int argc, char **argv){
 				//Lemme see dem errors
 				printf("\e[1;1H\e[2J");
 			}
+			else {
+			}
 			firstload = 0;
-			printf("Panel de control (%i)\n", menu);
+			printf("Panel de control\n");
 			printf("===================\n");
 			printf("1) Abrir archivo de clientes\n");
 			printf("2) Agregar cliente\n");
@@ -26,10 +36,12 @@ int main (int argc, char **argv){
 			printf("7) Listar clientes por última transacción\n");
 			printf("8) Listar clientes por cantidad de dinero\n");
 			printf("9) Salir\n");
+			printf("=================== DEBUG OPTIONS:\n");
 			printf("50) Imprimir listado de clientes\n");
+			printf("51) Hash Name\n");
 			printf("===================\n");
 			if (loaded == 1){
-				printf("Archivo abierto!");
+				printf("Archivo abierto!\n");
 				printf("===================\n");
 			}
 			printf("Ingrese opción: ");
@@ -43,29 +55,29 @@ int main (int argc, char **argv){
 			printf("===================\n");
 			printf("Escriba la ruta del archivo: ");
 			scanf("%s", &filename);
-			crear_lista(&filename, &lista);
+			cargar_archivo(&filename, hash);
 			menu = 0;
 		}
 
 		//Agregar Cliente
 		else if (menu == 2){
-			for(int i=0;i<5;i++){
-      	data[i]=malloc(sizeof(char)*50);
-      }
+
 			printf("\e[1;1H\e[2J");
 			printf("Agregar cliente\n");
 			printf("===================\n");
 			printf("Nombre: ");
-			scanf("%s", data[0]);
+			scanf("%s", nombre);
 			printf("Apellido: ");
-			scanf("%s", data[1]);
+			scanf("%s", apellido);
 			printf("Email: ");
-			scanf("%s", data[2]);
+			scanf("%s", email);
 			printf("Género (Male o Female):");
-			scanf("%s", data[3]);
+			scanf("%s", genero);
 			printf("Dirección: ");
-			scanf(" %[^\n]s", data[4]);
-			agregar_elemento_lista(&lista, data[0], data[1], data[2], data[3], data[4]);
+			scanf(" %[^\n]s", direccion);
+			printf("%s %s %s %s %s\n", nombre, apellido, email, genero, direccion);
+			agregar_elemento_lista(&hash[hash_data(apellido)].list, free_id, nombre, apellido, email, genero, direccion);
+			free_id++;
 			menu=0;
 		}
 
@@ -74,37 +86,74 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Eliminar cliente\n");
 			printf("===================\n");
+			printf("Nombre: ");
+			scanf("%s", nombre);
+			printf("Apellido: ");
+			scanf("%s", apellido);
+			remover_elemento_lista(&hash[hash_data(apellido)].list, nombre, apellido);
+			menu = 0;
 		}
 
-		//Buscar Cliente
+		//Buscar Cliente TODO
 		else if (menu == 4){
 			printf("\e[1;1H\e[2J");
 			printf("Buscar cliente\n");
 			printf("===================\n");
+			printf("1) Buscar por ID\n");
+			printf("2) Buscar por nombre\n");
+			printf("3) Buscar por apellido\n");
+			printf("Seleccione método de búsqueda: ");
+			scanf("%d", &submenu);
+			if (submenu == 1){
+				int searchId;
+				printf("===================\n");
+				printf("ID:");
+				scanf("%d", &searchId);
+				buscar_por_id(hash, searchId);
+			}
+			else if (submenu == 2){
+				char* searchNombre;
+				printf("===================\n");
+				printf("Nombre:");
+				scanf("%s", searchNombre);
+				buscar_por_nombre(hash, searchNombre);
+			}
+			else if (submenu == 3){
+				char* searchApellido;
+				printf("===================\n");
+				printf("Apellido:");
+				scanf("%s", searchApellido);
+				buscar_por_apellido(&hash[hash_data(apellido)].list, searchApellido);
+			}
+			else {
+				menu = 4;
+			}
+			menu = 0;
+			submenu = 0;
 		}
 
-		//Agregar Transacción
+		//Agregar Transacción TODO
 		else if (menu == 5){
 			printf("\e[1;1H\e[2J");
 			printf("Agregar transacción\n");
 			printf("===================\n");
 		}
 
-		//Deshacer última Transacción
+		//Deshacer última Transacción TODO
 		else if (menu == 6){
 			printf("\e[1;1H\e[2J");
 			printf("Deshacer última transacción\n");
 			printf("===================\n");
 		}
 
-		//Generar lista de cilentes por última transacción
+		//Generar lista de cilentes por última transacción TODO
 		else if (menu == 7){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes con transacciones recientes\n");
 			printf("===================\n");
 		}
 
-		//Generar lista de cilentes por dinero
+		//Generar lista de cilentes por dinero TODO
 		else if (menu == 8){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes ordenados por dinero\n");
@@ -122,13 +171,58 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("DEBUG! Listar clientes\n");
 			printf("===================\n");
-			listar_lista(&lista);
+			listar_lista(&hash[hash_data("Perez")].list);
 			sleep(4);
 			menu = 0;
 			sleep(1);
 		}
+
+		else if (menu == 51){
+			printf("\e[1;1H\e[2J");
+			printf("HASH Name\n");
+			printf("===================\n");
+			printf("%i\n",hash_data("Name"));
+			menu = 0;
+			sleep(1);
+			
+		}
 	};
 	return 0;
+}
+
+void cargar_archivo(char *filename, Hash* hash){
+	char line[255];
+	int linelength;
+	FILE *fp;
+	if ((fp = fopen(filename, "r"))){
+		fp = fopen(filename, "r");
+		printf("Archivo abierto correctamente. Guardando en memoria...\n");
+		loaded = 1;
+		fgets(line, 255, fp);
+		int id;
+		char* nombre;
+    char* apellido;
+    char* email;
+    char* genero;
+    char* direccion;
+		char aux[1000];
+		struct p *ultimo = NULL;
+		while(fgets(aux,999,fp)){
+			id = atoi(strtok(aux,"\t"));
+    	nombre = strtok(NULL,"\t");
+    	apellido = strtok(NULL,"\t");
+    	email = strtok(NULL,"\t");
+			genero = strtok(NULL,"\t");
+			direccion = strtok(NULL, "\n");
+			agregar_elemento_lista(&hash[hash_data(apellido)].list, free_id, nombre, apellido, email, genero, direccion/*, transacciones*/);
+			free_id++;
+		}
+	}
+	else{
+		printf("\nERROR: El archivo no existe\n");
+		loaded = 0;
+		sleep(1);
+	}
 }
 
 
