@@ -39,13 +39,14 @@ void buscar_por_id(Hash* hash, int id){
 				printf("Email: %s\n", nodo->email);
 				printf("Género: %s\n", nodo->genero);
 				printf("Dirección: %s\n", nodo->direccion);
-				sleep(3);
+				
 			}
 			else {
 			}
 			nodo = nodo->next;
 		}
 	}
+	sleep(5);
 }
 
 void buscar_por_nombre(Hash* hash, char* nombre){
@@ -73,6 +74,7 @@ void buscar_por_nombre(Hash* hash, char* nombre){
 void buscar_por_apellido(Hash* hash, char* apellido){
 	List* nodo = malloc(sizeof(List));
 	nodo = hash[hash_data(apellido)].list;
+	printf("\e[1;1H\e[2J");
 	while(nodo->next != NULL){
 		if(strcmp(nodo->apellido, apellido)==0){
 			printf("USUARIO ENCONTRADO:\n");
