@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+struct p *lista = NULL;
 
-void cli(int menu);
-struct p *lista_personas = NULL;
-
-
+int menu;
+int loaded;
 int selected;
