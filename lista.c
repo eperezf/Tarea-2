@@ -45,7 +45,7 @@ void crear_lista(const char * filename, struct p **lista){
           ultimo = persona;
         }
 		}
-		sleep(5);
+		sleep(1);
   }
 	else{
 		printf("\nERROR: El archivo no existe\n");
@@ -57,7 +57,32 @@ void crear_lista(const char * filename, struct p **lista){
 void listar_lista(struct p **lista){
 	struct p *nodo = *lista;
   while(nodo->next != NULL){
-  	printf("%d %s %s\n",nodo->id, nodo->nombre, nodo->apellido);
+  	printf("%d %s %s %s %s %s\n",nodo->id, nodo->nombre, nodo->apellido, nodo->email, nodo->genero, nodo->direccion);
     nodo = nodo->next;
   }
+	printf("%d %s %s %s %s %s\n",nodo->id, nodo->nombre, nodo->apellido, nodo->email, nodo->genero, nodo->direccion);
+}
+
+void agregar_elemento_lista(struct p **lista, char * nombre, char * apellido, char * email, char * genero, char * direccion){
+	struct p *nuevo = malloc(sizeof(struct p));
+	strcpy(nuevo->nombre, nombre);
+	strcpy(nuevo->apellido, apellido);
+	strcpy(nuevo->email, email);
+	strcpy(nuevo->genero, genero);
+	strcpy(nuevo->direccion, direccion);
+	nuevo->next = NULL;
+	if (*lista == NULL){
+		*lista = nuevo;
+		nuevo->id = 1;
+	}
+	else {
+		struct p *nodo = *lista;
+  	while(nodo->next != NULL){
+    	nodo = nodo->next;
+  	}
+		nuevo->id = nodo->id+1;
+		nodo->next = nuevo;
+		nodo = nodo->next;
+	}
+	sleep(2);
 }

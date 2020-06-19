@@ -25,3 +25,5 @@ void agregar_elemento_lista();
 void eliminar_elemento_lista();
 
 void listar_lista(struct p **lista);
+
+void agregar_elemento_lista(struct p **lista, char* nombre, char* apellido, char* email, char * genero, char* direccion);

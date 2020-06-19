@@ -5,6 +5,7 @@
 
 int main (int argc, char **argv){
 	firstload = 1;
+	char* data[5];
 	while(menu !=9){
 
 		//Menu principal
@@ -14,7 +15,7 @@ int main (int argc, char **argv){
 				printf("\e[1;1H\e[2J");
 			}
 			firstload = 0;
-			printf("Panel de control\n");
+			printf("Panel de control (%i)\n", menu);
 			printf("===================\n");
 			printf("1) Abrir archivo de clientes\n");
 			printf("2) Agregar cliente\n");
@@ -28,8 +29,7 @@ int main (int argc, char **argv){
 			printf("50) Imprimir listado de clientes\n");
 			printf("===================\n");
 			if (loaded == 1){
-				printf("Archivo abierto: %s", &filename);
-				printf(".txt\n");
+				printf("Archivo abierto!");
 				printf("===================\n");
 			}
 			printf("Ingrese opción: ");
@@ -49,9 +49,24 @@ int main (int argc, char **argv){
 
 		//Agregar Cliente
 		else if (menu == 2){
+			for(int i=0;i<5;i++){
+      	data[i]=malloc(sizeof(char)*50);
+      }
 			printf("\e[1;1H\e[2J");
 			printf("Agregar cliente\n");
 			printf("===================\n");
+			printf("Nombre: ");
+			scanf("%s", data[0]);
+			printf("Apellido: ");
+			scanf("%s", data[1]);
+			printf("Email: ");
+			scanf("%s", data[2]);
+			printf("Género (Male o Female):");
+			scanf("%s", data[3]);
+			printf("Dirección: ");
+			scanf(" %[^\n]s", data[4]);
+			agregar_elemento_lista(&lista, data[0], data[1], data[2], data[3], data[4]);
+			menu=0;
 		}
 
 		//Eliminar Cliente
@@ -108,7 +123,9 @@ int main (int argc, char **argv){
 			printf("DEBUG! Listar clientes\n");
 			printf("===================\n");
 			listar_lista(&lista);
+			sleep(4);
 			menu = 0;
+			sleep(1);
 		}
 	};
 	return 0;
