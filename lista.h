@@ -23,3 +23,5 @@ void crear_lista(const char * filename, struct p **lista);
 void agregar_elemento_lista();
 
 void eliminar_elemento_lista();
+
+void listar_lista(struct p **lista);

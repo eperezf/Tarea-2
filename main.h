@@ -6,4 +6,4 @@ struct p *lista = NULL;
 
 int menu;
 int loaded;
-int selected;
+int firstload;

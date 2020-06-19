@@ -52,5 +52,12 @@ void crear_lista(const char * filename, struct p **lista){
 		loaded = 0;
 		sleep(1);
 	}
+}
 
+void listar_lista(struct p **lista){
+	struct p *nodo = *lista;
+  while(nodo->next != NULL){
+  	printf("%d %s %s\n",nodo->id, nodo->nombre, nodo->apellido);
+    nodo = nodo->next;
+  }
 }

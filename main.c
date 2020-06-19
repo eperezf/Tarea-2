@@ -4,11 +4,16 @@
 #include "lista.h"
 
 int main (int argc, char **argv){
+	firstload = 1;
 	while(menu !=9){
 
 		//Menu principal
 		if (menu==0){
-			//printf("\e[1;1H\e[2J");
+			if (firstload == 0){
+				//Lemme see dem errors
+				printf("\e[1;1H\e[2J");
+			}
+			firstload = 0;
 			printf("Panel de control\n");
 			printf("===================\n");
 			printf("1) Abrir archivo de clientes\n");
@@ -102,7 +107,7 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("DEBUG! Listar clientes\n");
 			printf("===================\n");
-
+			listar_lista(&lista);
 			menu = 0;
 		}
 	};
