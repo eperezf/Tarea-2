@@ -105,7 +105,7 @@ int main (int argc, char **argv){
 			printf("Seleccione método de búsqueda: ");
 			scanf("%d", &submenu);
 			if (submenu == 1){
-				int searchId = malloc(sizeof(char*));
+				int searchId;
 				printf("===================\n");
 				printf("ID: ");
 				scanf("%d", &searchId);

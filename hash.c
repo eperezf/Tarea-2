@@ -4,7 +4,7 @@
 Hash* crear_hash(int size){
 	Hash* hash;
   hash = malloc(sizeof(Hash)*5);
-  for (int i = 0; i < 5; i++){
+  for (int i = 0; i < 27; i++){
   	hash[i].key=i;
   	hash[i].list=crear_lista();
   }
@@ -12,7 +12,7 @@ Hash* crear_hash(int size){
 }
 
 int hash_data(char* apellido){
-	int hash = apellido[0] % 5;
+	int hash = apellido[0]-65; //ASCII A = 65 DEC
 	return hash;
 }
 
@@ -26,10 +26,10 @@ void remover_elemento_hash(Hash* hash, int key){
 
 void buscar_por_id(Hash* hash, int id){
 	List* nodo = malloc(sizeof(List));;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i <27; i++)
 	{
 		nodo = hash[i].list;
-		while(nodo->next != NULL){
+		while(nodo != NULL){
 			if(nodo->id == id){
 				printf("\e[1;1H\e[2J");
 				printf("USUARIO ENCONTRADO:\n");
@@ -52,10 +52,10 @@ void buscar_por_id(Hash* hash, int id){
 void buscar_por_nombre(Hash* hash, char* nombre){
 	List* nodo = malloc(sizeof(List));
 	printf("\e[1;1H\e[2J");
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 27; i++)
 	{
 		nodo = hash[i].list;
-		while(nodo->next != NULL){
+		while(nodo != NULL){
 			if(strcmp(nodo->nombre, nombre) == 0){
 				printf("USUARIO ENCONTRADO:\n");
 				printf("ID: %i\n", nodo->id);
@@ -75,7 +75,7 @@ void buscar_por_apellido(Hash* hash, char* apellido){
 	List* nodo = malloc(sizeof(List));
 	nodo = hash[hash_data(apellido)].list;
 	printf("\e[1;1H\e[2J");
-	while(nodo->next != NULL){
+	while(nodo != NULL){
 		if(strcmp(nodo->apellido, apellido)==0){
 			printf("USUARIO ENCONTRADO:\n");
 			printf("ID: %i\n", nodo->id);
