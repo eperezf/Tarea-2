@@ -36,9 +36,11 @@ int main (int argc, char **argv){
 			printf("7) Listar clientes por última transacción\n");
 			printf("8) Listar clientes por cantidad de dinero\n");
 			printf("9) Salir\n");
+			/*
 			printf("=================== DEBUG OPTIONS:\n");
 			printf("50) Imprimir listado de clientes\n");
 			printf("51) Hash Name\n");
+			*/
 			printf("===================\n");
 			if (loaded == 1){
 				printf("Archivo abierto!\n");
@@ -134,18 +136,74 @@ int main (int argc, char **argv){
 			submenu = 0;
 		}
 
-		//Agregar Transacción TODO
+		//Agregar Transacción
 		else if (menu == 5){
+			int userId;
+			int accion;
+			int monto;
+			Pile*edit = malloc(sizeof(Pile));
 			printf("\e[1;1H\e[2J");
 			printf("Agregar transacción\n");
 			printf("===================\n");
+			printf("ID del usuario: ");
+			scanf("%d", &userId);
+			printf("¿Depósito o giro? (101 para depósito, 201 para giro): ");
+			scanf("%d", &accion);
+			printf("Monto: ");
+			scanf("%d", &monto);
+			List* nodo = malloc(sizeof(List));
+			for (int i = 0; i <27; i++){
+				nodo = hash[i].list;
+				while(nodo != NULL){
+					if(nodo->id == userId){
+						printf("Usuario encontrado: %s %s\n", nodo->nombre, nodo->apellido);
+						ultima_transaccion = nodo->id;
+						if (accion == 101){
+							nodo->saldo = nodo->saldo + monto;
+							agregar_elemento_pila(&nodo->transacciones, monto, accion);
+						}
+						else if(accion == 201){
+							if (nodo->saldo - monto < 0){
+								printf("No se puede realizar giro. Fondos Insuficientes.\n");
+								sleep(3);
+							}
+							else {
+								nodo->saldo = nodo->saldo - monto;
+								agregar_elemento_pila(&nodo->transacciones, monto, accion);
+							}
+						}
+					}
+					nodo = nodo->next;
+				}
+			}
+			menu = 0;
 		}
 
-		//Deshacer última Transacción TODO
+		//Deshacer última Transacción
 		else if (menu == 6){
 			printf("\e[1;1H\e[2J");
 			printf("Deshacer última transacción\n");
 			printf("===================\n");
+			List* nodo = malloc(sizeof(List));
+			for (int i = 0; i <27; i++){
+				nodo = hash[i].list;
+				while(nodo != NULL){
+					if(nodo->id == ultima_transaccion){
+						printf("Usuario encontrado: %s %s\n", nodo->nombre, nodo->apellido);
+						if (nodo->transacciones->codigo == 101){
+							printf("Restando $%i al saldo\n", nodo->transacciones->monto);
+							nodo->saldo = nodo->saldo - nodo->transacciones->monto;
+						}
+						else {
+							printf("Agregando $%i al saldo\n", nodo->transacciones->monto);
+							nodo->saldo = nodo->saldo + nodo->transacciones->monto;
+						}
+						remover_elemento_pila(&nodo->transacciones);
+					}
+				nodo = nodo->next;
+				}
+			}
+			menu = 0;
 		}
 
 		//Generar lista de cilentes por última transacción TODO
@@ -153,6 +211,8 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes con transacciones recientes\n");
 			printf("===================\n");
+			printf("No funciona :(\n");
+			sleep(3);
 		}
 
 		//Generar lista de cilentes por dinero TODO
@@ -160,6 +220,8 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes ordenados por dinero\n");
 			printf("===================\n");
+			printf("No funciona :(\n");
+			sleep(3);
 		}
 
 		//Salir
@@ -167,6 +229,8 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes ordenados por dinero\n");
 			printf("===================\n");
+			printf("No funciona :(\n");
+			sleep(3);
 		}
 
 		else if (menu == 50){
@@ -216,7 +280,7 @@ void cargar_archivo(char *filename, Hash* hash){
     	email = strtok(NULL,"\t");
 			genero = strtok(NULL,"\t");
 			direccion = strtok(NULL, "\n");
-			agregar_elemento_lista(&hash[hash_data(apellido)].list, free_id, nombre, apellido, email, genero, direccion/*, transacciones*/);
+			agregar_elemento_lista(&hash[hash_data(apellido)].list, free_id, nombre, apellido, email, genero, direccion);
 			free_id++;
 		}
 	}
