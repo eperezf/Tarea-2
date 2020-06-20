@@ -8,7 +8,7 @@ List* crear_lista(){
     return head;
 }
 
-void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, char* email, char* genero, char* direccion/*, Pile* transacciones*/){
+void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, char* email, char* genero, char* direccion){
 	List* nuevo = malloc(sizeof(List));
 	nuevo->id = id;
   strcpy(nuevo->nombre,nombre);
@@ -16,7 +16,8 @@ void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, c
   strcpy(nuevo->email,email);
   strcpy(nuevo->genero,genero);
   strcpy(nuevo->direccion, direccion);
-  //nuevo->transacciones=transacciones;
+	nuevo->saldo = 0;
+  nuevo->transacciones=crear_pila();
   nuevo->next=NULL;
   if(*list==NULL){
     *list=nuevo;

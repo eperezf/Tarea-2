@@ -136,9 +136,31 @@ int main (int argc, char **argv){
 
 		//Agregar Transacción TODO
 		else if (menu == 5){
+			int userId;
+			int accion;
+			int monto;
+			Pile*edit = malloc(sizeof(Pile));
 			printf("\e[1;1H\e[2J");
 			printf("Agregar transacción\n");
 			printf("===================\n");
+			printf("ID del usuario: ");
+			scanf("%d", &userId);
+			printf("¿Depósito o giro? (101 para depósito, 201 para giro): ");
+			scanf("%d", &accion);
+			printf("Monto: ");
+			scanf("%d", &monto);
+			List* nodo = malloc(sizeof(List));
+			for (int i = 0; i <27; i++){
+				nodo = hash[i].list;
+				while(nodo != NULL){
+					if(nodo->id == userId){
+						printf("Usuario encontrado: %s %s\n", nodo->nombre, nodo->apellido);
+						agregar_elemento_pila(&nodo->transacciones, monto, accion);
+					}
+					nodo = nodo->next;
+				}
+			}
+			menu = 0;
 		}
 
 		//Deshacer última Transacción TODO
@@ -216,7 +238,7 @@ void cargar_archivo(char *filename, Hash* hash){
     	email = strtok(NULL,"\t");
 			genero = strtok(NULL,"\t");
 			direccion = strtok(NULL, "\n");
-			agregar_elemento_lista(&hash[hash_data(apellido)].list, free_id, nombre, apellido, email, genero, direccion/*, transacciones*/);
+			agregar_elemento_lista(&hash[hash_data(apellido)].list, free_id, nombre, apellido, email, genero, direccion);
 			free_id++;
 		}
 	}
