@@ -9,6 +9,7 @@ int menu;
 int submenu;
 int loaded;
 int firstload;
+int ultima_transaccion;
 int free_id = 1;
 
 void cargar_archivo(char *filename, Hash* hash);

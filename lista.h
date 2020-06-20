@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "pila.h"
 
 typedef struct List{
     int id;
@@ -12,7 +13,8 @@ typedef struct List{
     char email[50];
     char genero[8];
     char direccion[128];
-    //Pile* transacciones;
+		int saldo;
+    Pile* transacciones;
     struct List* next;
 }List;
 
@@ -21,7 +23,7 @@ char filename;
 int loaded;
 
 List *crear_lista();
-void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, char* email, char* genero, char* direccion/*, Pile* transacciones*/);
+void agregar_elemento_lista(List** list, int id, char* nombre, char* apellido, char* email, char* genero, char* direccion);
 void remover_elemento_lista (List** list, char* nombre, char* apellido);
 void listar_lista(List** list);
 

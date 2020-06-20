@@ -39,7 +39,8 @@ void buscar_por_id(Hash* hash, int id){
 				printf("Email: %s\n", nodo->email);
 				printf("Género: %s\n", nodo->genero);
 				printf("Dirección: %s\n", nodo->direccion);
-				
+				printf("Saldo: %i\n", nodo->saldo);
+				listar_pila(&nodo->transacciones);
 			}
 			else {
 			}
@@ -57,13 +58,16 @@ void buscar_por_nombre(Hash* hash, char* nombre){
 		nodo = hash[i].list;
 		while(nodo != NULL){
 			if(strcmp(nodo->nombre, nombre) == 0){
+				printf("\e[1;1H\e[2J");
 				printf("USUARIO ENCONTRADO:\n");
 				printf("ID: %i\n", nodo->id);
 				printf("Nombre: %s\n", nodo->nombre);
 				printf("Apellido: %s\n", nodo->apellido);
 				printf("Email: %s\n", nodo->email);
 				printf("Género: %s\n", nodo->genero);
-				printf("Dirección: %s\n\n", nodo->direccion);
+				printf("Dirección: %s\n", nodo->direccion);
+				printf("Saldo: %i\n", nodo->saldo);
+				listar_pila(&nodo->transacciones);
 			}
 			nodo = nodo->next;
 		}
@@ -77,13 +81,16 @@ void buscar_por_apellido(Hash* hash, char* apellido){
 	printf("\e[1;1H\e[2J");
 	while(nodo != NULL){
 		if(strcmp(nodo->apellido, apellido)==0){
+			printf("\e[1;1H\e[2J");
 			printf("USUARIO ENCONTRADO:\n");
 			printf("ID: %i\n", nodo->id);
 			printf("Nombre: %s\n", nodo->nombre);
 			printf("Apellido: %s\n", nodo->apellido);
 			printf("Email: %s\n", nodo->email);
 			printf("Género: %s\n", nodo->genero);
-			printf("Dirección: %s\n\n", nodo->direccion);
+			printf("Dirección: %s\n", nodo->direccion);
+			printf("Saldo: %i\n", nodo->saldo);
+			listar_pila(&nodo->transacciones);
 		}
 		nodo = nodo->next;
 	}
