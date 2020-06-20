@@ -17,11 +17,17 @@ void agregar_elemento_pila(Pile** pile, int monto, int codigo){
 	nuevo-> codigo =codigo;
 	nuevo->next = *pile;
 	*pile = nuevo;
+
 	sleep(3);
 }
 
 void remover_elemento_pila(Pile** pile){
-
+	Pile* actual = malloc(sizeof(Pile));
+	actual = *pile;
+	*pile = (*pile)->next;
+	free(actual);
+	printf("Última transacción eliminada\n");
+	sleep(3);
 }
 
 void listar_pila(Pile** pile){

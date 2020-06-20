@@ -157,6 +157,7 @@ int main (int argc, char **argv){
 				while(nodo != NULL){
 					if(nodo->id == userId){
 						printf("Usuario encontrado: %s %s\n", nodo->nombre, nodo->apellido);
+						ultima_transaccion = nodo->id;
 						if (accion == 101){
 							nodo->saldo = nodo->saldo + monto;
 							agregar_elemento_pila(&nodo->transacciones, monto, accion);
@@ -178,11 +179,31 @@ int main (int argc, char **argv){
 			menu = 0;
 		}
 
-		//Deshacer última Transacción TODO
+		//Deshacer última Transacción
 		else if (menu == 6){
 			printf("\e[1;1H\e[2J");
 			printf("Deshacer última transacción\n");
 			printf("===================\n");
+			List* nodo = malloc(sizeof(List));
+			for (int i = 0; i <27; i++){
+				nodo = hash[i].list;
+				while(nodo != NULL){
+					if(nodo->id == ultima_transaccion){
+						printf("Usuario encontrado: %s %s\n", nodo->nombre, nodo->apellido);
+						if (nodo->transacciones->codigo == 101){
+							printf("Restando $%i al saldo\n", nodo->transacciones->monto);
+							nodo->saldo = nodo->saldo - nodo->transacciones->monto;
+						}
+						else {
+							printf("Agregando $%i al saldo\n", nodo->transacciones->monto);
+							nodo->saldo = nodo->saldo + nodo->transacciones->monto;
+						}
+						remover_elemento_pila(&nodo->transacciones);
+					}
+				nodo = nodo->next;
+				}
+			}
+			menu = 0;
 		}
 
 		//Generar lista de cilentes por última transacción TODO
@@ -190,6 +211,8 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes con transacciones recientes\n");
 			printf("===================\n");
+			printf("No funciona :(\n");
+			sleep(3);
 		}
 
 		//Generar lista de cilentes por dinero TODO
@@ -197,6 +220,8 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes ordenados por dinero\n");
 			printf("===================\n");
+			printf("No funciona :(\n");
+			sleep(3);
 		}
 
 		//Salir
@@ -204,6 +229,8 @@ int main (int argc, char **argv){
 			printf("\e[1;1H\e[2J");
 			printf("Listar clientes ordenados por dinero\n");
 			printf("===================\n");
+			printf("No funciona :(\n");
+			sleep(3);
 		}
 
 		else if (menu == 50){
