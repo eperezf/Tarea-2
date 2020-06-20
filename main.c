@@ -36,9 +36,11 @@ int main (int argc, char **argv){
 			printf("7) Listar clientes por última transacción\n");
 			printf("8) Listar clientes por cantidad de dinero\n");
 			printf("9) Salir\n");
+			/*
 			printf("=================== DEBUG OPTIONS:\n");
 			printf("50) Imprimir listado de clientes\n");
 			printf("51) Hash Name\n");
+			*/
 			printf("===================\n");
 			if (loaded == 1){
 				printf("Archivo abierto!\n");
@@ -134,7 +136,7 @@ int main (int argc, char **argv){
 			submenu = 0;
 		}
 
-		//Agregar Transacción TODO
+		//Agregar Transacción
 		else if (menu == 5){
 			int userId;
 			int accion;
@@ -155,7 +157,20 @@ int main (int argc, char **argv){
 				while(nodo != NULL){
 					if(nodo->id == userId){
 						printf("Usuario encontrado: %s %s\n", nodo->nombre, nodo->apellido);
-						agregar_elemento_pila(&nodo->transacciones, monto, accion);
+						if (accion == 101){
+							nodo->saldo = nodo->saldo + monto;
+							agregar_elemento_pila(&nodo->transacciones, monto, accion);
+						}
+						else if(accion == 201){
+							if (nodo->saldo - monto < 0){
+								printf("No se puede realizar giro. Fondos Insuficientes.\n");
+								sleep(3);
+							}
+							else {
+								nodo->saldo = nodo->saldo - monto;
+								agregar_elemento_pila(&nodo->transacciones, monto, accion);
+							}
+						}
 					}
 					nodo = nodo->next;
 				}
