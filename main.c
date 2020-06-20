@@ -19,7 +19,6 @@ int main (int argc, char **argv){
 		//Menu principal
 		if (menu==0){
 			if (firstload == 0){
-				//Lemme see dem errors
 				printf("\e[1;1H\e[2J");
 			}
 			else {
@@ -37,7 +36,7 @@ int main (int argc, char **argv){
 			printf("8) Listar clientes por cantidad de dinero\n");
 			printf("9) Salir\n");
 			/*
-			printf("=================== DEBUG OPTIONS:\n");
+			printf("=================== DEBUG:\n");
 			printf("50) Imprimir listado de clientes\n");
 			printf("51) Hash Name\n");
 			*/
