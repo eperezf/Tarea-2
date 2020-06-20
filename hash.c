@@ -39,6 +39,7 @@ void buscar_por_id(Hash* hash, int id){
 				printf("Email: %s\n", nodo->email);
 				printf("Género: %s\n", nodo->genero);
 				printf("Dirección: %s\n", nodo->direccion);
+				listar_pila(&nodo->transacciones);
 				
 			}
 			else {
