@@ -1,10 +1,10 @@
-# Tarea 2
+# Homework 2
 
-## Descripción
-Tarea 2 para el ramo de Estructura de Datos y Algoritmos, primer semestre 2020, Universidad Adolfo Ibáñez
+## Description
+Homework Nº 2 for the Data Structure and Algorithms, first semester 2020, Adolf Ibáñez University.
 
-## Autor
+## Author
 Eduardo Pérez
 
-## Profesor
+## Professor
 Sebastián Saez
